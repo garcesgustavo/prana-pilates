@@ -3,6 +3,18 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Splash Screen Handler
+    const splash = document.getElementById('splash-screen');
+    if (splash) {
+        setTimeout(() => {
+            splash.classList.add('fade-out');
+            // Allow interactions after fade out
+            setTimeout(() => {
+                splash.style.display = 'none';
+            }, 1000);
+        }, 2000);
+    }
+
     // Contact Form Handler
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
