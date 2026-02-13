@@ -104,6 +104,53 @@
             </div>
         </section>
 
+        <section id="precios" class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Planes y Precios</h2>
+                <div class="pricing-grid">
+                    <div class="pricing-card fade-in-up">
+                        <div class="pricing-header">
+                            <h3>Clase Suelta</h3>
+                            <div class="price">$15.000 <span>/clase</span></div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> Acceso a 1 clase</li>
+                            <li><i class="fas fa-check"></i> Válido por 15 días</li>
+                            <li><i class="fas fa-check"></i> Todas las actividades</li>
+                        </ul>
+                        <button class="btn-payment btn-outline" data-plan="Clase Suelta" data-price="15000">Elegir Plan</button>
+                    </div>
+                    
+                    <div class="pricing-card featured fade-in-up">
+                        <div class="plan-badge">Más Popular</div>
+                        <div class="pricing-header">
+                            <h3>Pack 8 Clases</h3>
+                            <div class="price">$85.000 <span>/mes</span></div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> 2 clases por semana</li>
+                            <li><i class="fas fa-check"></i> Seguimiento personalizado</li>
+                            <li><i class="fas fa-check"></i> App de reservas</li>
+                        </ul>
+                        <button class="btn-payment btn-primary" data-plan="Pack 8 Clases" data-price="85000">Comenzar Ahora</button>
+                    </div>
+                    
+                    <div class="pricing-card fade-in-up">
+                        <div class="pricing-header">
+                            <h3>Pack 12 Clases</h3>
+                            <div class="price">$110.000 <span>/mes</span></div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> 3 clases por semana</li>
+                            <li><i class="fas fa-check"></i> Acceso prioritario</li>
+                            <li><i class="fas fa-check"></i> Máximos beneficios</li>
+                        </ul>
+                        <button class="btn-payment btn-outline" data-plan="Pack 12 Clases" data-price="110000">Elegir Plan</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="reservas" class="section bg-light">
             <div class="container">
                 <h2 class="section-title fade-in-up">Reserva tu Clase</h2>
@@ -160,6 +207,31 @@
     <a href="https://wa.me/5491135638928?text=Hola,%20quisiera%20solicitar%20información%20sobre%20las%20clases%20de%20Prana%20Pilates." class="whatsapp-float" target="_blank" rel="noopener noreferrer" title="Chatea con nosotros">
         <i class="fab fa-whatsapp"></i>
     </a>
+
+    <!-- Payment Modal -->
+    <div id="payment-modal" class="modal-overlay">
+        <div class="modal-card">
+            <span class="close-modal">&times;</span>
+            <h2 id="modal-plan-name">Selecciona un método de pago</h2>
+            <p>Plan: <strong id="selected-plan-text">-</strong></p>
+            
+            <div class="payment-methods">
+                <a href="#" class="pay-btn pay-mp" id="mp-link">
+                    <i class="fas fa-credit-card"></i> Mercado Pago / Débito
+                </a>
+                <button class="pay-btn pay-bank" id="show-bank">
+                    <i class="fas fa-university"></i> Transferencia Bancaria
+                </button>
+            </div>
+
+            <div id="bank-info" class="bank-details">
+                <p><strong>CBU/Alias:</strong> prana.pilates.db</p>
+                <p><strong>Titular:</strong> Daniela Belforte</p>
+                <p><strong>Banco:</strong> Banco Galicia</p>
+                <p><small>* Luego de transferir, por favor envía el comprobante por WhatsApp.</small></p>
+            </div>
+        </div>
+    </div>
 
     <script src="js/api.js?v=1.1"></script>
     <script src="js/main.js?v=1.1"></script>

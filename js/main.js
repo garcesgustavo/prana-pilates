@@ -66,6 +66,40 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // Payment Modal Logic
+    const paymentModal = document.getElementById('payment-modal');
+    const closePayment = document.querySelector('.close-modal');
+    const bankBtn = document.getElementById('show-bank');
+    const bankInfo = document.getElementById('bank-info');
+    const planBbuttons = document.querySelectorAll('.btn-payment');
+
+    if (paymentModal) {
+        planBbuttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const plan = btn.dataset.plan;
+                const price = btn.dataset.price;
+
+                document.getElementById('selected-plan-text').textContent = `${plan} ($${price})`;
+                paymentModal.style.display = 'flex';
+                bankInfo.style.display = 'none'; // Reset bank info
+            });
+        });
+
+        closePayment.addEventListener('click', () => {
+            paymentModal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === paymentModal) {
+                paymentModal.style.display = 'none';
+            }
+        });
+
+        bankBtn.addEventListener('click', () => {
+            bankInfo.style.display = bankInfo.style.display === 'block' ? 'none' : 'block';
+        });
+    }
 });
 
 // Defer non-critical tasks until after the page has loaded and is interactive
