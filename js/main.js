@@ -82,14 +82,18 @@ async function renderBookingUI(container) {
     // Simple HTML for booking
     container.innerHTML = `
         <div class="booking-card">
-            <h3>Selecciona un Horario</h3>
+            <h3>Datos para reserva</h3>
             <form id="booking-form">
                 <div class="form-group">
-                    <label>Nombre:</label>
+                    <label>Nombre y Apellido:</label>
                     <input type="text" name="name" required>
                 </div>
                 <div class="form-group">
-                    <label>Email:</label>
+                    <label>Teléfono de contacto:</label>
+                    <input type="tel" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label>Mail de contacto:</label>
                     <input type="email" name="email" required>
                 </div>
                  <div class="form-group">
@@ -127,6 +131,7 @@ async function renderBookingUI(container) {
         const data = {
             name: formData.get('name'),
             email: formData.get('email'),
+            phone: formData.get('phone'),
             activity: formData.get('activity'),
             day: formData.get('day'),
             time: formData.get('time'),

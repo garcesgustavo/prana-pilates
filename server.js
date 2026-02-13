@@ -29,6 +29,7 @@ if (MONGODB_URI) {
 const appointmentSchema = new mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true },
+    phone: String,
     activity: { type: String, required: true },
     day: String,
     time: String,
@@ -143,6 +144,7 @@ app.post('/api/appointments', async (req, res) => {
         const newAppointment = new Appointment({
             name: name.substring(0, 100).replace(/[<>]/g, ""),
             email: email.substring(0, 100).replace(/[<>]/g, ""),
+            phone: (phone || "").substring(0, 20),
             activity: activity.substring(0, 50),
             day,
             time
