@@ -1,0 +1,30 @@
+{
+  "name": "prana-pilates",
+  "version": "1.0.0",
+  "description": "Este es el sitio web oficial de **Prana Pilates**, diseñado para ofrecer una experiencia de usuario de lujo, moderna y totalmente adaptativa.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/garcesgustavo/prana-pilates.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/garcesgustavo/prana-pilates/issues"
+  },
+  "homepage": "https://github.com/garcesgustavo/prana-pilates#readme",
+  "dependencies": {
+    "body-parser": "^2.2.2",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.2.1",
+    "fs-extra": "^11.3.3",
+    "helmet": "^8.1.0"
+  }
+}

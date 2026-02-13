@@ -14,12 +14,36 @@ Este es el sitio web oficial de **Prana Pilates**, diseñado para ofrecer una ex
 ## 🛠️ Tecnologías Utilizadas
 
 - **Frontend**: HTML5 Semántico, CSS3 (Custom Properties, Grid, Flexbox, Animations).
-- **Lógica**: JavaScript (Vanilla JS).
+- **Backend**: Node.js & Express.
+- **Base de Datos**: JSON (File System).
+- **Lógica**: JavaScript (Asíncrono, Fetch API).
 - **Iconografía**: FontAwesome.
 - **Fuentes**: Google Fonts.
-- **Imágenes**: Unsplash (Cargadas dinámicamente).
 
-## 🚀 Cómo Desplegar el Sitio
+---
+
+## 🚀 Cómo Iniciar el Backend (Node.js)
+
+Este proyecto ahora cuenta con un servidor para la persistencia real de datos.
+
+### Requisitos
+- Node.js instalado (v14 o superior).
+
+### Instalación y Uso
+1. Abre una terminal en la carpeta del proyecto.
+2. Instala las dependencias:
+   ```bash
+   npm install
+   ```
+3. Inicia el servidor:
+   ```bash
+   npm start
+   ```
+El servidor correrá en `http://localhost:3000`.
+
+---
+
+## 🚀 Despliegue del Frontend
 
 ### Opción 1: Netlify (Recomendado)
 1. Ve a [Netlify Drop](https://app.netlify.com/drop).

@@ -2,22 +2,22 @@
  * Main Client Logic
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     // Log visit
-    Store.logVisit();
+    await Api.logVisit();
 
     // Contact Form Handler
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
 
-            // Treat contact as a potential client/lead
-            Store.addUser({ name, email });
+            // Treat contact as a potential client/lead (optional)
+            // await Api.addUser({ name, email }); 
 
             alert('¡Gracias por tu mensaje! Nos pondremos en contacto pronto.');
             contactForm.reset();
@@ -27,8 +27,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Booking Logic
     const bookingApp = document.getElementById('booking-app');
     if (bookingApp) {
-        renderBookingUI(bookingApp);
+        await renderBookingUI(bookingApp);
     }
+
+    // ... rest of DOMContentLoaded logic (Scroll Animations, Mobile Menu) keep unchanged ...
 
     // Scroll Animations
     const observerOptions = {
@@ -76,11 +78,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-function renderBookingUI(container) {
-    const availability = Store.getAvailability();
+async function renderBookingUI(container) {
+    const availability = await Api.getAvailability();
+    if (!availability) return;
 
-    // Simple HTML for booking (MVP)
-    // In a real app this would be a datepicker
+    // Simple HTML for booking
     container.innerHTML = `
         <div class="booking-card">
             <h3>Selecciona un Horario</h3>
@@ -122,7 +124,7 @@ function renderBookingUI(container) {
     `;
 
     const form = document.getElementById('booking-form');
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
         const formData = new FormData(form);
         const data = {
@@ -131,11 +133,15 @@ function renderBookingUI(container) {
             activity: formData.get('activity'),
             day: formData.get('day'),
             time: formData.get('time'),
-            date: new Date().toLocaleDateString() // Simplification
+            date: new Date().toLocaleDateString()
         };
 
-        Store.addAppointment(data);
-        alert(`¡Reserva solicitada para ${data.activity}! Te confirmaremos por email.`);
-        form.reset();
+        const result = await Api.addAppointment(data);
+        if (result) {
+            alert(`¡Reserva solicitada para ${data.activity}! Te confirmaremos por email.`);
+            form.reset();
+        } else {
+            alert('Lo sentimos, hubo un error al procesar tu reserva. Por favor intenta más tarde.');
+        }
     });
 }

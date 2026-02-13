@@ -2,16 +2,34 @@
  * Admin Dashboard Logic
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     if (!window.location.pathname.includes('admin')) return;
 
+    // Check for token or prompt
+    let stats = await Api.getStats();
+    if (!stats || stats.error === 'unauthorized') {
+        const password = prompt('Por favor, ingresa la contraseña de administrador:');
+        if (password) {
+            Api.setToken(password);
+            stats = await Api.getStats();
+            if (!stats || stats.error === 'unauthorized') {
+                alert('Contraseña incorrecta.');
+                window.location.href = 'index.html';
+                return;
+            }
+        } else {
+            window.location.href = 'index.html';
+            return;
+        }
+    }
+
     // Load Stats
-    loadStats();
+    await loadStats();
 
     // Navigation Handler
     const navLinks = document.querySelectorAll('.admin-nav a[data-view]');
     navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
+        link.addEventListener('click', async (e) => {
             e.preventDefault();
 
             // Update Active State
@@ -20,24 +38,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Switch View
             const viewName = link.dataset.view;
-            loadView(viewName);
+            await loadView(viewName);
         });
     });
 
     // Default View
-    loadView('dashboard');
+    await loadView('dashboard');
 });
 
-function loadStats() {
-    const stats = Store.getStats();
+async function loadStats() {
+    const stats = await Api.getStats();
+    if (!stats) return;
     document.getElementById('stat-visits').textContent = stats.visits;
     document.getElementById('stat-pending').textContent = stats.appointments;
     document.getElementById('stat-clients').textContent = stats.users;
 }
 
-function loadView(viewName) {
+async function loadView(viewName) {
     const contentArea = document.getElementById('content-area');
     const pageTitle = document.getElementById('page-title');
+    const stats = await Api.getStats();
 
     switch (viewName) {
         case 'dashboard':
@@ -46,22 +66,22 @@ function loadView(viewName) {
                 <div class="dashboard-stats">
                     <div class="stat-card">
                         <h3>Visitas Totales</h3>
-                        <p>${Store.getStats().visits}</p>
+                        <p>${stats ? stats.visits : '-'}</p>
                     </div>
                 </div>
                 <div class="section-title" style="margin-top: 2rem;">Últimas Reservas</div>
-                ${renderAppointmentsTable(3)}
+                ${await renderAppointmentsTable(3)}
             `;
             break;
 
         case 'appointments':
             pageTitle.textContent = 'Reservas';
-            contentArea.innerHTML = renderAppointmentsTable();
+            contentArea.innerHTML = await renderAppointmentsTable();
             break;
 
         case 'clients':
             pageTitle.textContent = 'Base de Datos de Clientes';
-            contentArea.innerHTML = renderClientsTable();
+            contentArea.innerHTML = await renderClientsTable();
             break;
 
         case 'settings':
@@ -71,8 +91,9 @@ function loadView(viewName) {
     }
 }
 
-function renderAppointmentsTable(limit = null) {
-    let appointments = Store.getAppointments().reverse();
+async function renderAppointmentsTable(limit = null) {
+    let appointments = await Api.getAppointments();
+    appointments.reverse();
     if (limit) appointments = appointments.slice(0, limit);
 
     if (appointments.length === 0) return '<p>No hay reservas registradas.</p>';
@@ -101,8 +122,8 @@ function renderAppointmentsTable(limit = null) {
     `;
 }
 
-function renderClientsTable() {
-    const users = Store.getUsers();
+async function renderClientsTable() {
+    const users = await Api.getUsers();
 
     if (users.length === 0) return '<p>No hay clientes registrados.</p>';
 
