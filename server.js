@@ -53,8 +53,11 @@ const Stat = mongoose.model('Stat', statSchema);
 
 // Initialize visits if not exist
 async function initStats() {
-    const stats = await Stat.findOne();
-    if (!stats) await Stat.create({ visits: 0 });
+    try {
+        await Stat.findOneAndUpdate({}, { $setOnInsert: { visits: 0 } }, { upsert: true });
+    } catch (err) {
+        console.error('Error initializing stats:', err);
+    }
 }
 if (MONGODB_URI) initStats();
 
@@ -176,7 +179,7 @@ app.get('/api/availability', async (req, res) => {
 // Visit tracking
 app.post('/api/visit', async (req, res) => {
     try {
-        const stats = await Stat.findOneAndUpdate({}, { $inc: { visits: 1 } }, { new: true });
+        const stats = await Stat.findOneAndUpdate({}, { $inc: { visits: 1 } }, { new: true, upsert: true });
         res.json({ visits: stats.visits });
     } catch (err) {
         res.status(500).json({ error: 'Error al registrar visita' });

@@ -51,22 +51,29 @@ async function migrate() {
             );
         }
 
-        // Migrate Appointments
-        const appointmentsToInsert = data.appointments.map(app => ({
-            name: app.name,
-            email: app.email,
-            activity: app.activity,
-            day: app.day,
-            time: app.time,
-            status: app.status || 'pending',
-            created_at: app.created_at
-        }));
+        // Migrate Appointments (avoid duplicates by checking email and created_at)
+        let migratedCount = 0;
+        for (const app of data.appointments) {
+            const exists = await Appointment.findOne({
+                email: app.email,
+                created_at: app.created_at
+            });
 
-        if (appointmentsToInsert.length > 0) {
-            await Appointment.insertMany(appointmentsToInsert);
+            if (!exists) {
+                await Appointment.create({
+                    name: app.name,
+                    email: app.email,
+                    activity: app.activity,
+                    day: app.day,
+                    time: app.time,
+                    status: app.status || 'pending',
+                    created_at: app.created_at
+                });
+                migratedCount++;
+            }
         }
 
-        console.log('¡Migración completada con éxito!');
+        console.log(`¡Migración completada! Se agregaron ${migratedCount} nuevas reservas.`);
         process.exit(0);
     } catch (err) {
         console.error('Error durante la migración:', err);

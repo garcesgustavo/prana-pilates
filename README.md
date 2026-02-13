@@ -59,6 +59,8 @@ El servidor correrá en `http://localhost:3000`.
 
 ---
 
+---
+
 ## 🚀 Despliegue en la Nube (Acceso desde Móvil)
 
 Para que el sitio sea accesible desde cualquier móvil en el mundo, utilizaremos **Render.com**.
@@ -71,21 +73,12 @@ Para que el sitio sea accesible desde cualquier móvil en el mundo, utilizaremos
    - **Runtime**: `Node`
    - **Build Command**: `npm install`
    - **Start Command**: `npm start`
-5. Haz clic en **"Create Web Service"**.
+5. **Variables de Entorno**: Ve a la pestaña **Environment** y añade:
+   - `MONGODB_URI`: Tu link de conexión de MongoDB Atlas.
+   - `ADMIN_TOKEN`: `prana2026`
+6. Haz clic en **"Create Web Service"**.
 
-Una vez finalizado, Render te dará una URL (ejemplo: `https://prana-pilates.onrender.com`) que podrás abrir en cualquier celular.
-
----
-
-## 🚀 Despliegue Frontend Alternativo (Estático)
-1. Ve a [Netlify Drop](https://app.netlify.com/drop).
-2. Arrastra y suelta la carpeta de este proyecto en el recuadro.
-3. ¡Tu sitio estará online en segundos!
-
-### Opción 2: GitHub Pages
-1. Crea un repositorio en GitHub.
-2. Sube los archivos (index.html, css/, js/, assets/).
-3. Activa **GitHub Pages** en los ajustes del repositorio.
+Una vez finalizado, Render te dará una URL (ejemplo: `https://prana-pilates.onrender.com`) que podrás abrir en cualquier celular con persistencia real de datos.
 
 ---
 © 2024 Prana Pilates. Todos los derechos reservados.

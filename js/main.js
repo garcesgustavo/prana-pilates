@@ -57,14 +57,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     if (menuToggle && mainNav) {
         menuToggle.addEventListener('click', () => {
-            mainNav.classList.toggle('active');
             const icon = menuToggle.querySelector('i');
-            if (mainNav.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
+            if (mainNav.classList.toggle('active')) {
+                icon.classList.replace('fa-bars', 'fa-times');
             } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
+                icon.classList.replace('fa-times', 'fa-bars');
             }
         });
 
