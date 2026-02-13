@@ -325,83 +325,80 @@ img {
 
 /* Sections */
 .section {
-    padding: var(--spacing-lg) 0;
-    content-visibility: auto;
-    contain-intrinsic-size: 1px 500px;
-    /* Guess for initial height */
+    padding: var(--spacing-xl) 0;
+    position: relative;
+    overflow: hidden;
 }
 
 .section-title {
     text-align: center;
     font-family: var(--font-heading);
-    font-size: 2.5rem;
-    color: var(--primary-color);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: var(--text-dark);
     margin-bottom: var(--spacing-lg);
-    /* More space */
-    font-weight: 300;
+    font-weight: 400;
+    letter-spacing: -1px;
 }
 
 .bg-light {
-    background-color: var(--bg-light);
-    /* Cream background */
+    background-color: var(--bg-alt);
 }
 
 /* Classes Grid */
 .classes-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--spacing-md);
-    margin-top: var(--spacing-md);
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--spacing-sm);
 }
 
-/* Class Cards - Luxury Style */
+/* Class Cards - Premium Glass Style */
 .class-card {
-    background: #fff;
-    padding: var(--spacing-lg) var(--spacing-md);
-    /* More vertical padding */
-    border-radius: 8px;
-    /* Slightly softer corners */
-    box-shadow: var(--shadow-soft);
-    text-align: center;
-    /* Centered text */
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    border: 1px solid rgba(0, 0, 0, 0.03);
-    /* Subtle border */
-    opacity: 0;
-    /* Initially hidden for animation */
-    transform: translateY(30px);
+    background: var(--bg-white);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-premium);
+    text-align: left;
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
 .class-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
-
-.class-card:hover .class-icon {
-    transform: scale(1.1);
-    color: var(--primary-dark);
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover);
 }
 
 .class-icon {
-    font-size: 3rem;
+    font-size: 2.5rem;
     color: var(--primary-color);
-    margin-bottom: var(--spacing-sm);
-    display: block;
-    transition: transform 0.3s ease, color 0.3s ease;
+    background: var(--primary-light);
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    transition: all 0.5s ease;
+}
+
+.class-card:hover .class-icon {
+    background: var(--primary-color);
+    color: var(--text-light);
+    transform: rotate(-5deg) scale(1.1);
 }
 
 .class-card h3 {
     font-family: var(--font-heading);
-    font-size: 1.8rem;
-    margin-bottom: var(--spacing-sm);
-    color: var(--primary-color);
+    font-size: 2rem;
+    color: var(--text-dark);
 }
 
 .class-card p {
-    font-size: 1.1rem;
-    color: var(--text-dark);
+    font-size: 1rem;
+    color: var(--text-muted);
     line-height: 1.8;
-    /* Airy text */
 }
 
 /* Scroll Animations */
@@ -421,114 +418,124 @@ img {
 /* Pricing Section */
 .pricing-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: var(--spacing-md);
-    max-width: 1000px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--spacing-sm);
+    max-width: 1200px;
     margin: 0 auto;
 }
 
 .pricing-card {
-    background: #fff;
-    padding: var(--spacing-lg) var(--spacing-md);
-    border-radius: 12px;
-    box-shadow: var(--shadow-soft);
+    background: var(--bg-white);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-premium);
     text-align: center;
     position: relative;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.5s ease;
+    border: 1px solid rgba(255, 255, 255, 0.5);
     display: flex;
     flex-direction: column;
 }
 
 .pricing-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover);
 }
 
 .pricing-card.featured {
-    border: 2px solid var(--primary-color);
+    background: var(--primary-color);
+    color: var(--text-light);
     transform: scale(1.05);
     z-index: 10;
 }
 
-.pricing-card.featured:hover {
-    transform: scale(1.05) translateY(-10px);
+.pricing-card.featured .price,
+.pricing-card.featured .pricing-header h3 {
+    color: var(--text-light);
+}
+
+.pricing-card.featured .pricing-features li i {
+    color: var(--accent-color);
+}
+
+.pricing-card.featured .btn-payment {
+    background: var(--text-light);
+    color: var(--primary-color);
 }
 
 .plan-badge {
     position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: var(--primary-color);
-    color: #fff;
-    padding: 0.4rem 1.2rem;
+    top: 2rem;
+    right: 2rem;
+    background: var(--accent-color);
+    color: var(--text-dark);
+    padding: 0.5rem 1rem;
     border-radius: 50px;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
 }
 
 .pricing-header h3 {
     font-family: var(--font-heading);
-    font-size: 1.8rem;
-    color: var(--primary-color);
+    font-size: 1.5rem;
+    color: var(--text-muted);
     margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .price {
-    font-size: 2.8rem;
-    font-weight: 700;
+    font-size: 4rem;
+    font-weight: 300;
     color: var(--text-dark);
     margin-bottom: 2rem;
+    font-family: var(--font-heading);
 }
 
 .price span {
-    font-size: 1rem;
-    color: #888;
-    font-weight: 400;
+    font-size: 1.1rem;
+    opacity: 0.7;
+    font-family: var(--font-body);
 }
 
 .pricing-features {
     text-align: left;
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem;
     flex-grow: 1;
 }
 
 .pricing-features li {
-    margin-bottom: 0.8rem;
+    margin-bottom: 1.25rem;
     display: flex;
     align-items: center;
-    gap: 10px;
-    color: #555;
+    gap: 12px;
+    color: inherit;
     font-size: 1rem;
-}
-
-.pricing-features li i {
-    color: var(--primary-color);
 }
 
 .btn-payment {
     width: 100%;
-    padding: 1rem;
+    padding: 1.25rem;
     border-radius: 50px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
     border: none;
-    font-size: 1rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .btn-outline {
-    background: transparent;
-    border: 2px solid var(--primary-color);
-    color: var(--primary-color);
+    background: var(--primary-light);
+    color: var(--primary-dark);
 }
 
 .btn-outline:hover {
     background: var(--primary-color);
-    color: #fff;
+    color: var(--text-light);
 }
 
 /* Payment Modal */
@@ -538,132 +545,49 @@ img {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(44, 51, 48, 0.4);
+    backdrop-filter: blur(8px);
     display: none;
     align-items: center;
     justify-content: center;
     z-index: 2000;
-    padding: 1rem;
+    padding: 1.5rem;
 }
 
 .modal-card {
-    background: #fff;
-    padding: 2.5rem;
-    border-radius: 12px;
+    background: var(--bg-white);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-lg);
     width: 100%;
-    max-width: 500px;
+    max-width: 550px;
     text-align: center;
     position: relative;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-hover);
 }
 
 .close-modal {
     position: absolute;
-    top: 1rem;
-    right: 1.5rem;
-    font-size: 1.5rem;
+    top: 1.5rem;
+    right: 2rem;
+    font-size: 2rem;
     cursor: pointer;
-    color: #888;
+    color: var(--text-muted);
+    transition: color 0.3s ease;
 }
 
-.security-info {
-    margin: 1.5rem 0;
-    padding: 1.2rem;
-    background: #f0f7f4;
-    border-radius: 12px;
-    font-size: 0.95rem;
-    color: #2e7d32;
-    border: 1px solid #c8e6c9;
-}
-
-.trust-icons {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 1rem;
-    flex-wrap: wrap;
-}
-
-.trust-pill {
-    background: #fff;
-    padding: 0.5rem 1rem;
-    border-radius: 50px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: #555;
-    border: 1px solid #e0e0e0;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.trust-pill i {
-    color: #2e7d32;
-}
-
-.trust-pill i.fa-cc-visa {
-    color: #1a1f71;
-}
-
-.trust-pill i.fa-cc-mastercard {
-    color: #eb001b;
-}
-
-.payment-methods {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    margin-top: 2rem;
-}
-
-.pay-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    padding: 1.2rem;
-    border-radius: 8px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    border: 1px solid #eee;
-}
-
-.pay-mp {
-    background: #009EE3;
-    color: #fff;
-}
-
-.pay-bank {
-    background: #f8f9fa;
-    color: #333;
-}
-
-.pay-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.close-modal:hover {
+    color: var(--text-dark);
 }
 
 .bank-details {
     margin-top: 1.5rem;
-    padding: 1rem;
-    background: #fdfaf5;
-    border: 1px dashed var(--primary-color);
-    border-radius: 8px;
+    padding: 1.5rem;
+    background: var(--bg-alt);
+    border-radius: var(--radius-md);
     text-align: left;
-    font-size: 0.9rem;
+    font-size: 1rem;
     display: none;
-}
-
-.bank-details p {
-    margin-bottom: 0.5rem;
-}
-
-@media (max-width: 768px) {
-    .pricing-card.featured {
-        transform: scale(1);
-    }
+    border: 1px solid var(--glass-border);
 }
 
 /* Gallery */
