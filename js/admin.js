@@ -96,6 +96,11 @@ async function loadView(viewName) {
             contentArea.innerHTML = await renderAppointmentsTable();
             break;
 
+        case 'messages':
+            pageTitle.textContent = 'Mensajes de Contacto';
+            contentArea.innerHTML = await renderMessagesTable();
+            break;
+
         case 'clients':
             pageTitle.textContent = 'Base de Datos de Clientes';
             contentArea.innerHTML = await renderClientsTable();
@@ -135,6 +140,34 @@ async function renderAppointmentsTable(limit = null) {
                         <td>${app.name}<br/><small>${app.email}</small></td>
                         <td>${app.day} - ${app.time}</td>
                         <td><span class="status-badge">${app.status}</span></td>
+                    </tr>
+                `).join('')}
+            </tbody>
+        </table>
+    `;
+}
+
+async function renderMessagesTable() {
+    let messages = await Api.getMessages();
+    if (!messages) return '<p>Error al cargar mensajes.</p>';
+
+    if (messages.length === 0) return '<p>No hay mensajes registrados.</p>';
+
+    return `
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Remitente</th>
+                    <th>Mensaje</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${messages.map(m => `
+                    <tr>
+                        <td>${new Date(m.created_at).toLocaleDateString()}</td>
+                        <td>${m.name}<br/><small>${m.email}</small></td>
+                        <td>${m.message}</td>
                     </tr>
                 `).join('')}
             </tbody>

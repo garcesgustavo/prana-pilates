@@ -87,5 +87,32 @@ const Api = {
             console.error('Error logging visit:', err);
             return null;
         }
+    },
+
+    async addMessage(data) {
+        try {
+            const response = await fetch(`${API_BASE_URL}/messages`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            return await response.json();
+        } catch (err) {
+            console.error('Error adding message:', err);
+            return null;
+        }
+    },
+
+    async getMessages() {
+        try {
+            const response = await fetch(`${API_BASE_URL}/messages`, {
+                headers: { 'Authorization': this._token }
+            });
+            if (response.status === 401) return [];
+            return await response.json();
+        } catch (err) {
+            console.error('Error fetching messages:', err);
+            return [];
+        }
     }
 };

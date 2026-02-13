@@ -9,12 +9,19 @@ document.addEventListener('DOMContentLoaded', () => {
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
+            const data = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                message: document.getElementById('message').value
+            };
 
-            alert('¡Gracias por tu mensaje! Nos pondremos en contacto pronto.');
-            contactForm.reset();
+            const result = await Api.addMessage(data);
+            if (result && result.success) {
+                alert('¡Gracias por tu mensaje! Nos pondremos en contacto pronto.');
+                contactForm.reset();
+            } else {
+                alert('Lo sentimos, hubo un error al enviar tu mensaje. Por favor intenta más tarde.');
+            }
         });
     }
 
