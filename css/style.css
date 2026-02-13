@@ -244,23 +244,33 @@ ul {
 .hero {
     height: 100vh;
     min-height: 700px;
-    background: linear-gradient(rgba(253, 252, 251, 0.75), rgba(253, 252, 251, 0.4)),
-        url('../assets/images/logo.jpeg');
-    background-size: cover;
-    background-position: center;
+    background: var(--bg-main);
     display: flex;
     align-items: center;
     position: relative;
     overflow: hidden;
 }
 
-@media (min-width: 1200px) {
-    .hero {
-        background-size: auto 90%;
-        background-repeat: no-repeat;
-        background-position: calc(50% + 300px) center;
-    }
+/* Centered Logo Watermark - Hero Only */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    max-width: 600px;
+    height: 50%;
+    background-image: url('../assets/images/logo.jpeg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    opacity: 0.08;
+    z-index: 1;
+    pointer-events: none;
 }
+
+
 
 .hero::after {
     content: '';
