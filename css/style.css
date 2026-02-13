@@ -752,6 +752,19 @@ ul {
     }
 }
 
+/* Main Content Entrance Animation */
+body.loading main,
+body.loading .main-header {
+    opacity: 0;
+    transform: scale(1.02);
+    filter: blur(10px);
+}
+
+main,
+.main-header {
+    transition: all 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
 /* Zen Splash Screen */
 .splash-screen {
     position: fixed;

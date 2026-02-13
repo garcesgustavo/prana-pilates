@@ -8,11 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (splash) {
         setTimeout(() => {
             splash.classList.add('fade-out');
+            document.body.classList.remove('loading');
             // Allow interactions after fade out
             setTimeout(() => {
                 splash.style.display = 'none';
             }, 1000);
-        }, 4000);
+        }, 3000);
     }
 
     // Contact Form Handler
