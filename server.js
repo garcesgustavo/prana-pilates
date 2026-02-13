@@ -93,8 +93,10 @@ app.use(helmet({
             "style-src": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://cdnjs.cloudflare.com"],
             "font-src": ["'self'", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com"],
             "frame-src": ["'self'", "https://www.google.com"],
+            "frame-ancestors": ["'self'"],
         },
     },
+    frameguard: { action: 'sameorigin' }
 }));
 app.use(cors());
 app.use(bodyParser.json());
@@ -141,6 +143,11 @@ app.get('/api/stats', requireAdmin, async (req, res) => {
     } catch (err) {
         res.status(500).json({ error: 'Error al obtener estadísticas' });
     }
+});
+
+// Development Preview Dashboard
+app.get('/preview', (req, res) => {
+    res.sendFile(path.join(__dirname, 'preview.html'));
 });
 
 // Appointments

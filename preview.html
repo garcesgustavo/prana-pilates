@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prana Pilates | Dev Previewer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --dark: #1c211f;
+            --accent: #7D8F85;
+            --bg: #141816;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: white;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Toolbar */
+        .toolbar {
+            height: 60px;
+            background: var(--dark);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            border-bottom: 1px solid var(--glass);
+            z-index: 100;
+        }
+
+        .brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            background: var(--glass);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover { background: var(--accent); }
+        .btn.active { background: var(--accent); border-color: transparent; }
+
+        /* Preview Containers */
+        .preview-container {
+            flex: 1;
+            display: flex;
+            gap: 2px;
+            background: #000;
+        }
+
+        .viewport {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: var(--bg);
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .viewport-header {
+            height: 40px;
+            background: rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            padding: 0 1rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #888;
+        }
+
+        iframe {
+            flex: 1;
+            border: none;
+            background: white;
+            width: 100%;
+            height: 100%;
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        /* Mobile Simulation */
+        .is-mobile .viewport {
+            padding: 2rem 0;
+            align-items: center;
+        }
+
+        .is-mobile iframe {
+            width: 375px;
+            height: 667px !important;
+            flex: none;
+            border-radius: 40px;
+            border: 12px solid #222;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="brand">
+            <i class="fas fa-leaf" style="color: var(--accent)"></i>
+            Dev Dashboard
+        </div>
+        <div class="controls">
+            <button class="btn" id="toggleDesktop" onclick="setMode('desktop')">
+                <i class="fas fa-desktop"></i> Desktop
+            </button>
+            <button class="btn" id="toggleMobile" onclick="setMode('mobile')">
+                <i class="fas fa-mobile-alt"></i> Mobile
+            </button>
+            <button class="btn" onclick="refreshAll()">
+                <i class="fas fa-sync"></i> Refresh
+            </button>
+        </div>
+        <div style="font-size: 0.7rem; opacity: 0.5">Prana Pilates v1.2</div>
+    </div>
+
+    <div class="preview-container" id="container">
+        <!-- Site -->
+        <div class="viewport">
+            <div class="viewport-header"><i class="fas fa-globe mr-2"></i> &nbsp; Public Site</div>
+            <iframe id="iframeSite" src="/"></iframe>
+        </div>
+
+        <!-- Admin -->
+        <div class="viewport">
+            <div class="viewport-header"><i class="fas fa-lock mr-2"></i> &nbsp; Admin Panel</div>
+            <iframe id="iframeAdmin" src="/admin.html"></iframe>
+        </div>
+    </div>
+
+    <script>
+        function setMode(mode) {
+            const container = document.getElementById('container');
+            const btnDesktop = document.getElementById('toggleDesktop');
+            const btnMobile = document.getElementById('toggleMobile');
+
+            if (mode === 'mobile') {
+                container.classList.add('is-mobile');
+                btnMobile.classList.add('active');
+                btnDesktop.classList.remove('active');
+            } else {
+                container.classList.remove('is-mobile');
+                btnDesktop.classList.add('active');
+                btnMobile.classList.remove('active');
+            }
+        }
+
+        function refreshAll() {
+            document.getElementById('iframeSite').src = '/';
+            document.getElementById('iframeAdmin').src = '/admin.html';
+        }
+
+        // Init
+        setMode('desktop');
+    </script>
+</body>
+</html>
