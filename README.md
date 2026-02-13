@@ -43,9 +43,25 @@ El servidor correrá en `http://localhost:3000`.
 
 ---
 
-## 🚀 Despliegue del Frontend
+## 🚀 Despliegue en la Nube (Acceso desde Móvil)
 
-### Opción 1: Netlify (Recomendado)
+Para que el sitio sea accesible desde cualquier móvil en el mundo, utilizaremos **Render.com**.
+
+### Pasos para el Usuario:
+1. Crea una cuenta en [Render.com](https://render.com).
+2. Haz clic en **"New +"** y selecciona **"Web Service"**.
+3. Conecta tu repositorio de GitHub `prana-pilates`.
+4. Configura los siguientes valores:
+   - **Runtime**: `Node`
+   - **Build Command**: `npm install`
+   - **Start Command**: `npm start`
+5. Haz clic en **"Create Web Service"**.
+
+Una vez finalizado, Render te dará una URL (ejemplo: `https://prana-pilates.onrender.com`) que podrás abrir en cualquier celular.
+
+---
+
+## 🚀 Despliegue Frontend Alternativo (Estático)
 1. Ve a [Netlify Drop](https://app.netlify.com/drop).
 2. Arrastra y suelta la carpeta de este proyecto en el recuadro.
 3. ¡Tu sitio estará online en segundos!
