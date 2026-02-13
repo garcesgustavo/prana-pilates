@@ -10,7 +10,10 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 const MONGODB_URI = process.env.MONGODB_URI;
-const ADMIN_TOKEN = process.env.ADMIN_TOKEN || 'prana2026';
+const ADMIN_TOKEN = process.env.ADMIN_TOKEN;
+if (!ADMIN_TOKEN) {
+    console.error('CRITICAL: ADMIN_TOKEN not found in .env. Admin features will be disabled.');
+}
 
 // ---------------------------------------------------------
 // MongoDB Connection
@@ -141,22 +144,24 @@ app.post('/api/appointments', async (req, res) => {
             return res.status(400).json({ error: 'Datos requeridos faltantes.' });
         }
 
+        const sanitize = (str) => typeof str === 'string' ? str.substring(0, 100).replace(/[<>&"']/g, "") : "";
+
         const newAppointment = new Appointment({
-            name: name.substring(0, 100).replace(/[<>]/g, ""),
-            email: email.substring(0, 100).replace(/[<>]/g, ""),
-            phone: (phone || "").substring(0, 20),
-            activity: activity.substring(0, 50),
-            day,
-            time
+            name: sanitize(name),
+            email: sanitize(email).toLowerCase(),
+            phone: sanitize(phone).substring(0, 20),
+            activity: sanitize(activity).substring(0, 50),
+            day: sanitize(day),
+            time: sanitize(time)
         });
         await newAppointment.save();
 
         // Update or create user
         await User.findOneAndUpdate(
-            { email: email.toLowerCase() },
+            { email: sanitize(email).toLowerCase() },
             {
-                name: name.substring(0, 100).replace(/[<>]/g, ""),
-                phone: (phone || '').substring(0, 20)
+                name: sanitize(name),
+                phone: sanitize(phone).substring(0, 20)
             },
             { upsert: true, new: true }
         );

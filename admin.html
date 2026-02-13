@@ -13,7 +13,25 @@
 </head>
 <body class="admin-body">
 
-    <div class="admin-layout">
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="logo">
+                <img src="assets/images/logo.jpeg" alt="Logo Prana Pilates" style="height: 60px; border-radius: 5px; margin-bottom: 1rem;">
+                <h2>Acceso Admin</h2>
+            </div>
+            <p>Ingresa la contraseña para gestionar el sitio.</p>
+            <form id="login-form">
+                <div class="form-group">
+                    <input type="password" id="admin-password" placeholder="Contraseña" required>
+                </div>
+                <div id="login-error" class="error-msg" style="display: none;">Contraseña incorrecta.</div>
+                <button type="submit" class="btn-primary" style="width: 100%;">Entrar</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="admin-layout" style="display: none;">
         <aside class="sidebar">
             <div class="logo">
                 <h2>Prana Admin</h2>

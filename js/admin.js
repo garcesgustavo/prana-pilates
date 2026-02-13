@@ -5,45 +5,62 @@
 document.addEventListener('DOMContentLoaded', async () => {
     if (!window.location.pathname.includes('admin')) return;
 
-    // Check for token or prompt
+    const loginModal = document.getElementById('login-modal');
+    const adminLayout = document.querySelector('.admin-layout');
+    const loginForm = document.getElementById('login-form');
+    const passwordInput = document.getElementById('admin-password');
+    const loginError = document.getElementById('login-error');
+
+    // Check for existing valid token
     let stats = await Api.getStats();
-    if (!stats || stats.error === 'unauthorized') {
-        const password = prompt('Por favor, ingresa la contraseña de administrador:');
-        if (password) {
-            Api.setToken(password);
-            stats = await Api.getStats();
-            if (!stats || stats.error === 'unauthorized') {
-                alert('Contraseña incorrecta.');
-                window.location.href = 'index.html';
-                return;
-            }
-        } else {
-            window.location.href = 'index.html';
-            return;
-        }
+    if (stats && stats.error !== 'unauthorized') {
+        showDashboard();
+    } else {
+        loginModal.style.display = 'flex';
+        adminLayout.style.display = 'none';
     }
 
-    // Load Stats
-    await loadStats();
+    loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const password = passwordInput.value;
+        Api.setToken(password);
 
-    // Navigation Handler
-    const navLinks = document.querySelectorAll('.admin-nav a[data-view]');
-    navLinks.forEach(link => {
-        link.addEventListener('click', async (e) => {
-            e.preventDefault();
-
-            // Update Active State
-            navLinks.forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
-
-            // Switch View
-            const viewName = link.dataset.view;
-            await loadView(viewName);
-        });
+        stats = await Api.getStats();
+        if (stats && stats.error !== 'unauthorized') {
+            showDashboard();
+        } else {
+            loginError.style.display = 'block';
+            passwordInput.value = '';
+            passwordInput.focus();
+        }
     });
 
-    // Default View
-    await loadView('dashboard');
+    async function showDashboard() {
+        loginModal.style.display = 'none';
+        adminLayout.style.display = 'flex';
+
+        // Load Stats
+        await loadStats();
+
+        // Navigation Handler
+        const navLinks = document.querySelectorAll('.admin-nav a[data-view]');
+        navLinks.forEach(link => {
+            link.addEventListener('click', async (e) => {
+                e.preventDefault();
+
+                // Update Active State
+                navLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+
+                // Switch View
+                const viewName = link.dataset.view;
+                await loadView(viewName);
+            });
+        });
+
+        // Default View
+        await loadView('dashboard');
+    }
 });
 
 async function loadStats() {
@@ -93,10 +110,13 @@ async function loadView(viewName) {
 
 async function renderAppointmentsTable(limit = null) {
     let appointments = await Api.getAppointments();
-    appointments.reverse();
-    if (limit) appointments = appointments.slice(0, limit);
+    if (!appointments || appointments.error) return '<p>Error al cargar reservas.</p>';
 
-    if (appointments.length === 0) return '<p>No hay reservas registradas.</p>';
+    // Copy the array to avoid mutating the original
+    const displayApps = [...appointments].reverse();
+    const finalApps = limit ? displayApps.slice(0, limit) : displayApps;
+
+    if (finalApps.length === 0) return '<p>No hay reservas registradas.</p>';
 
     return `
         <table class="data-table">
@@ -109,10 +129,10 @@ async function renderAppointmentsTable(limit = null) {
                 </tr>
             </thead>
             <tbody>
-                ${appointments.map(app => `
+                ${finalApps.map(app => `
                     <tr>
                         <td>${new Date(app.created_at).toLocaleDateString()}</td>
-                        <td>${app.name}<br><small>${app.email}</small></td>
+                        <td>${app.name}<br/><small>${app.email}</small></td>
                         <td>${app.day} - ${app.time}</td>
                         <td><span class="status-badge">${app.status}</span></td>
                     </tr>
@@ -125,7 +145,7 @@ async function renderAppointmentsTable(limit = null) {
 async function renderClientsTable() {
     const users = await Api.getUsers();
 
-    if (users.length === 0) return '<p>No hay clientes registrados.</p>';
+    if (!users || users.length === 0) return '<p>No hay clientes registrados.</p>';
 
     return `
         <table class="data-table">
