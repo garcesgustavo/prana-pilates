@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Prana Pilates</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="admin-body">
+
+    <div class="admin-layout">
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>Prana Admin</h2>
+            </div>
+            <nav class="admin-nav">
+                <ul>
+                    <li><a href="#" class="active" data-view="dashboard"><i class="fas fa-home"></i> Resumen</a></li>
+                    <li><a href="#" data-view="appointments"><i class="fas fa-calendar-check"></i> Reservas</a></li>
+                    <li><a href="#" data-view="clients"><i class="fas fa-users"></i> Clientes</a></li>
+                    <li><a href="#" data-view="settings"><i class="fas fa-cog"></i> Disponibilidad</a></li>
+                    <li><a href="index.html"><i class="fas fa-external-link-alt"></i> Ver Sitio</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="admin-content">
+            <header class="admin-header">
+                <h1 id="page-title">Resumen</h1>
+                <div class="user-info">
+                    <span>Administrador</span>
+                </div>
+            </header>
+
+            <div id="content-area" class="content-area">
+                <!-- Dynamic Content Loaded via JS -->
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <h3>Visitas Hoy</h3>
+                        <p id="stat-visits">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Reservas Pendientes</h3>
+                        <p id="stat-pending">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Clientes</h3>
+                        <p id="stat-clients">0</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/store.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>
