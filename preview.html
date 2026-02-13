@@ -158,6 +158,7 @@
 
     <script>
         function setMode(mode) {
+            console.log('Changing mode to:', mode);
             const container = document.getElementById('container');
             const btnDesktop = document.getElementById('toggleDesktop');
             const btnMobile = document.getElementById('toggleMobile');
@@ -174,12 +175,14 @@
         }
 
         function refreshAll() {
-            document.getElementById('iframeSite').src = '/';
-            document.getElementById('iframeAdmin').src = '/admin.html';
+            const site = document.getElementById('iframeSite');
+            const admin = document.getElementById('iframeAdmin');
+            site.src = site.src;
+            admin.src = admin.src;
         }
 
         // Init
-        setMode('desktop');
+        window.onload = () => setMode('desktop');
     </script>
 </body>
 </html>

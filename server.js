@@ -100,7 +100,14 @@ app.use(helmet({
 }));
 app.use(cors());
 app.use(bodyParser.json());
+// Development Preview Dashboard
+app.get('/preview', (req, res) => {
+    console.log('--- Dev Dashboard Hit ---');
+    res.status(200).sendFile(path.join(__dirname, 'preview.html'));
+});
+
 app.use(express.static(path.join(__dirname), {
+    extensions: ['html'], // Allow extensionless URLs like /preview -> /preview.html
     maxAge: '1d', // Cache static assets for 1 day
     setHeaders: (res, path) => {
         if (path.endsWith('.html') || path.endsWith('.js') || path.endsWith('.css')) {
@@ -145,10 +152,7 @@ app.get('/api/stats', requireAdmin, async (req, res) => {
     }
 });
 
-// Development Preview Dashboard
-app.get('/preview', (req, res) => {
-    res.sendFile(path.join(__dirname, 'preview.html'));
-});
+// Development Preview Dashboard moved up
 
 // Appointments
 app.get('/api/appointments', requireAdmin, async (req, res) => {
