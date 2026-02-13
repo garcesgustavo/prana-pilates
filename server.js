@@ -85,8 +85,8 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname), {
     maxAge: '1d', // Cache static assets for 1 day
     setHeaders: (res, path) => {
-        if (path.endsWith('.html')) {
-            res.setHeader('Cache-Control', 'public, max-age=0'); // Don't cache HTML files
+        if (path.endsWith('.html') || path.endsWith('.js') || path.endsWith('.css')) {
+            res.setHeader('Cache-Control', 'public, max-age=0'); // Force fresh content for HTML, JS, and CSS
         }
     }
 }));
