@@ -75,16 +75,41 @@ document.addEventListener('DOMContentLoaded', () => {
     const planBbuttons = document.querySelectorAll('.btn-payment');
 
     if (paymentModal) {
+        let activePlan = null;
+        let activePrice = null;
+
         planBbuttons.forEach(btn => {
             btn.addEventListener('click', () => {
-                const plan = btn.dataset.plan;
-                const price = btn.dataset.price;
+                activePlan = btn.dataset.plan;
+                activePrice = btn.dataset.price;
 
-                document.getElementById('selected-plan-text').textContent = `${plan} ($${price})`;
+                document.getElementById('selected-plan-text').textContent = `${activePlan} ($${activePrice})`;
                 paymentModal.style.display = 'flex';
                 bankInfo.style.display = 'none'; // Reset bank info
             });
         });
+
+        const mpPayButton = document.getElementById('mp-pay-button');
+        if (mpPayButton) {
+            mpPayButton.addEventListener('click', async () => {
+                mpPayButton.disabled = true;
+                const originalText = mpPayButton.innerHTML;
+                mpPayButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Iniciando pago seguro...';
+
+                const response = await Api.createPreference({
+                    plan: activePlan,
+                    price: activePrice
+                });
+
+                if (response && response.init_point) {
+                    window.location.href = response.init_point;
+                } else {
+                    alert('Hubo un error al iniciar el pago. Por favor intenta de nuevo.');
+                    mpPayButton.disabled = false;
+                    mpPayButton.innerHTML = originalText;
+                }
+            });
+        }
 
         closePayment.addEventListener('click', () => {
             paymentModal.style.display = 'none';

@@ -212,13 +212,21 @@
     <div id="payment-modal" class="modal-overlay">
         <div class="modal-card">
             <span class="close-modal">&times;</span>
-            <h2 id="modal-plan-name">Selecciona un método de pago</h2>
-            <p>Plan: <strong id="selected-plan-text">-</strong></p>
+            <h2 id="modal-plan-name">Pago 100% Seguro</h2>
+            <p>Plan seleccionado: <strong id="selected-plan-text">-</strong></p>
             
+            <div class="security-info">
+                <p><i class="fas fa-shield-alt"></i> Tus datos están protegidos y encriptados.</p>
+                <div class="security-badges">
+                    <img src="https://img.shields.io/badge/Mercado_Pago-Secure-009EE3?style=flat&logo=mercadopago" alt="Mercado Pago Secure">
+                    <img src="https://img.shields.io/badge/SSL-Encrypted-4CAF50?style=flat&logo=letsencrypt" alt="SSL Encrypted">
+                </div>
+            </div>
+
             <div class="payment-methods">
-                <a href="#" class="pay-btn pay-mp" id="mp-link">
-                    <i class="fas fa-credit-card"></i> Mercado Pago / Débito
-                </a>
+                <button class="pay-btn pay-mp" id="mp-pay-button">
+                    <i class="fas fa-lock"></i> Pagar con Mercado Pago / Tarjeta
+                </button>
                 <button class="pay-btn pay-bank" id="show-bank">
                     <i class="fas fa-university"></i> Transferencia Bancaria
                 </button>

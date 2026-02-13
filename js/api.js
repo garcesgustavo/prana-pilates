@@ -114,5 +114,19 @@ const Api = {
             console.error('Error fetching messages:', err);
             return [];
         }
+    },
+
+    async createPreference(data) {
+        try {
+            const response = await fetch(`${API_BASE_URL}/create-preference`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            return await response.json();
+        } catch (err) {
+            console.error('Error creating preference:', err);
+            return null;
+        }
     }
 };

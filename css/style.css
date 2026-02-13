@@ -520,6 +520,26 @@ img {
     color: #888;
 }
 
+.security-info {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: #f0f7f4;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #2e7d32;
+}
+
+.security-badges {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 0.8rem;
+}
+
+.security-badges img {
+    height: 25px;
+}
+
 .payment-methods {
     display: grid;
     grid-template-columns: 1fr;
