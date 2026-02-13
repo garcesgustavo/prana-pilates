@@ -297,7 +297,11 @@ if (externalUrl) {
     }, 14 * 60 * 1000); // 14 minutes
 }
 
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-    if (externalUrl) console.log(`Keep-alive active for: ${externalUrl}`);
-});
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`Server is running on http://localhost:${PORT}`);
+        if (externalUrl) console.log(`Keep-alive active for: ${externalUrl}`);
+    });
+}
+
+module.exports = app;
