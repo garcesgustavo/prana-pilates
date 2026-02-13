@@ -111,6 +111,7 @@ async function renderBookingUI(container) {
                         <option value="Miércoles">Miércoles</option>
                         <option value="Jueves">Jueves</option>
                         <option value="Viernes">Viernes</option>
+                        <option value="Sábado">Sábado</option>
                     </select>
                 </div>
                 <div class="form-group">
