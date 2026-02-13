@@ -3,15 +3,17 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
+const https = require('https');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const { MercadoPagoConfig, Preference } = require('mercadopago');
+
+require('dotenv').config();
 
 // Mercado Pago Configuration
 const mpClient = new MercadoPagoConfig({
     accessToken: process.env.MP_ACCESS_TOKEN || 'TEST-APP-ACCESS-TOKEN' // FALLBACK FOR DEV
 });
-require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -278,8 +280,6 @@ app.post('/api/visit', async (req, res) => {
         res.status(500).json({ error: 'Error al registrar visita' });
     }
 });
-
-const https = require('https');
 
 app.get('/api/health', (req, res) => {
     res.status(200).send('OK');

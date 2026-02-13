@@ -74,47 +74,6 @@ ul {
 
 /* Header */
 .main-header {
-    background-color: rgba(255, 255, 255, 0.95);
-    box-shadow: var(--shadow-soft);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    padding: var(--spacing-sm) 0;
-    backdrop-filter: blur(5px);
-}
-
-.main-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.brand-logo {
-    font-family: var(--font-heading);
-    color: var(--primary-color);
-    font-size: 1.5rem;
-    font-weight: bold;
-    letter-spacing: 1px;
-}
-
-.main-nav ul {
-    display: flex;
-    gap: var(--spacing-md);
-    align-items: center;
-}
-
-.main-nav a:hover {
-    color: var(--primary-color);
-}
-
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
-
-/* Main Header */
-.main-header {
     background-color: var(--glass);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -268,15 +227,22 @@ img {
 .hero {
     height: 100vh;
     min-height: 700px;
-    background: linear-gradient(rgba(253, 252, 251, 0.7), rgba(253, 252, 251, 0.3)),
+    background: linear-gradient(rgba(253, 252, 251, 0.75), rgba(253, 252, 251, 0.4)),
         url('../assets/images/logo.jpeg');
-    background-size: 60% auto;
-    background-repeat: no-repeat;
-    background-position: calc(50% + 200px) center;
+    background-size: cover;
+    background-position: center;
     display: flex;
     align-items: center;
     position: relative;
     overflow: hidden;
+}
+
+@media (min-width: 1200px) {
+    .hero {
+        background-size: auto 90%;
+        background-repeat: no-repeat;
+        background-position: calc(50% + 300px) center;
+    }
 }
 
 .hero::after {
