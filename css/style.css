@@ -265,7 +265,7 @@ ul {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: contain;
-    opacity: 0.08;
+    opacity: 0.15;
     z-index: 1;
     pointer-events: none;
 }
@@ -285,9 +285,10 @@ ul {
 .hero-content {
     max-width: 800px;
     padding: 0 var(--spacing-sm);
-    text-align: left;
+    text-align: center;
     position: relative;
-    z-index: 2;
+    z-index: 10;
+    margin: 0 auto;
 }
 
 .hero h1 {
