@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prana Pilates - Encuentra tu Equilibrio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <a href="#inicio" class="brand-logo">
+                    <img src="assets/images/logo.jpeg" alt="Logo Prana Pilates" class="header-logo">
+                    <span>Prana Pilates</span>
+                </a>
+            </div>
+            <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav class="main-nav" id="main-nav">
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#clases">Clases</a></li>
+                    <li><a href="#reservas" class="btn-primary">Reservar Turno</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="inicio" class="hero">
+            <div class="hero-content">
+                <h1>Prana Pilates</h1>
+                <h2>Transforma Cuerpo y Mente</h2>
+                <p>Descubre el poder del Pilates en un ambiente exclusivo y profesional.</p>
+                <a href="#reservas" class="btn-cta">Comienza Hoy</a>
+            </div>
+        </section>
+
+        <section id="clases" class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Nuestras Clases</h2>
+                <div class="classes-grid">
+                    <!-- Dynamic content will go here -->
+                    <div class="class-card">
+                        <i class="fas fa-sliders-h class-icon"></i>
+                        <h3>Reformer</h3>
+                        <p>Entrenamiento en camillas con resistencia progresiva. Ideal para <strong>tonificar la musculatura profunda</strong>, <strong>corregir la postura</strong> y aumentar la fuerza del núcleo sin impacto en las articulaciones.</p>
+                    </div>
+                    <div class="class-card">
+                        <i class="fas fa-spa class-icon"></i>
+                        <h3>Mat Pilates</h3>
+                        <p>Conecta mente y cuerpo a través de ejercicios de suelo enfocados en el "Powerhouse". Mejora tu <strong>control corporal</strong>, <strong>equilibrio</strong> y flexibilidad utilizando tu propio peso.</p>
+                    </div>
+                    <div class="class-card">
+                        <i class="fas fa-feather-alt class-icon"></i>
+                        <h3>Stretching</h3>
+                        <p>Sesiones dedicadas al estiramiento profundo para <strong>liberar tensiones acumuladas</strong>, <strong>mejorar el rango de movimiento</strong> y prevenir futuras lesiones. Bienestar integral para tu cuerpo.</p>
+                    </div>
+                    <div class="class-card">
+                        <i class="fas fa-dumbbell class-icon"></i>
+                        <h3>Funcional</h3>
+                        <p>Entrenamiento dinámico y enérgico. Mejora tu <strong>resistencia cardiovascular</strong>, <strong>fuerza general</strong> y coordinación mediante circuitos de movimientos naturales.</p>
+                    </div>
+                    <div class="class-card">
+                        <i class="fas fa-praying-hands class-icon"></i>
+                        <h3>Yoga</h3>
+                        <p>Conecta respiración y movimiento. Práctica ideal para ganar <strong>flexibilidad</strong>, <strong>calma mental</strong> y equilibrio interior a través de asanas fluidas.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="galeria" class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Nuestro Espacio</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item fade-in-up">
+                        <img src="https://images.unsplash.com/photo-1518310383802-640c2de311b2?auto=format&fit=crop&w=800&q=80" alt="Estudio de Pilates">
+                    </div>
+                    <div class="gallery-item fade-in-up">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=800&q=80" alt="Clase de Pilates">
+                    </div>
+                    <div class="gallery-item fade-in-up">
+                        <img src="https://images.unsplash.com/photo-1571388208497-71bedc66e932?auto=format&fit=crop&w=800&q=80" alt="Equipamiento Reformer">
+                    </div>
+                    <div class="gallery-item fade-in-up">
+                        <img src="https://images.unsplash.com/photo-1574680178050-55c6a6a96e0a?auto=format&fit=crop&w=800&q=80" alt="Detalle Pilates">
+                    </div>
+                    <div class="gallery-item fade-in-up">
+                        <img src="https://images.unsplash.com/photo-1588286840104-8957b019727f?auto=format&fit=crop&w=800&q=80" alt="Relax y Yoga">
+                    </div>
+                    <div class="gallery-item fade-in-up">
+                        <img src="https://images.unsplash.com/photo-1593079831268-3381b0db4a77?auto=format&fit=crop&w=800&q=80" alt="Interior Estudio">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="reservas" class="section bg-light">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Reserva tu Clase</h2>
+                <div id="booking-app" class="fade-in-up">
+                    <!-- Booking logic will be injected here -->
+                    <p class="loading-text">Cargando horarios disponibles...</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto" class="section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Contacto</h2>
+            <div class="contact-grid">
+                <div class="contact-form-wrapper contact-form fade-in-up">
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="name">Nombre:</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mensaje:</label>
+                            <textarea id="message" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Enviar Mensaje</button>
+                    </form>
+                </div>
+                <div class="map-wrapper fade-in-up">
+                    <!-- Google Maps: Av. Pres. Juan Domingo Perón 1072, Villa de Mayo -->
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3289.471607686851!2d-58.6859704847774!3d-34.46950278049449!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcbd2e69074b6f%3A0xe8c7b6f6f2d2b0e0!2sAv.%20Pres.%20Juan%20Domingo%20Per%C3%B3n%201072%2C%20B1614%20Villa%20De%20Mayo%2C%20Provincia%20de%20Buenos%20Aires!5e0!3m2!1ses!2sar!4v1646252000000!5m2!1ses!2sar" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2024 Prana Pilates. Todos los derechos reservados.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <a href="admin.html" class="admin-link">Acceso Admin</a>
+        </div>
+    </footer>
+
+    <script src="js/store.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
