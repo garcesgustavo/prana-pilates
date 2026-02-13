@@ -279,6 +279,25 @@ app.post('/api/visit', async (req, res) => {
     }
 });
 
+const https = require('https');
+
+app.get('/api/health', (req, res) => {
+    res.status(200).send('OK');
+});
+
+// Keep-Alive Mechanism for Render
+const externalUrl = process.env.RENDER_EXTERNAL_URL;
+if (externalUrl) {
+    setInterval(() => {
+        https.get(`${externalUrl}/api/health`, (res) => {
+            console.log(`Keep-alive ping sent to ${externalUrl}. Status: ${res.statusCode}`);
+        }).on('error', (err) => {
+            console.error('Keep-alive ping error:', err.message);
+        });
+    }, 14 * 60 * 1000); // 14 minutes
+}
+
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
+    if (externalUrl) console.log(`Keep-alive active for: ${externalUrl}`);
 });
