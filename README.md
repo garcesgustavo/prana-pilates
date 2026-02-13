@@ -15,8 +15,24 @@ Este es el sitio web oficial de **Prana Pilates**, diseñado para ofrecer una ex
 
 - **Frontend**: HTML5 Semántico, CSS3 (Custom Properties, Grid, Flexbox, Animations).
 - **Backend**: Node.js & Express.
-- **Base de Datos**: JSON (File System).
-- **Lógica**: JavaScript (Asíncrono, Fetch API).
+- **Base de Datos**: MongoDB Atlas (Persistencia real en la nube).
+- **Lógica**: JavaScript (Asíncrono, Mongoose).
+
+---
+
+## 🚀 Configuración de MongoDB
+
+Para que el sitio no pierda datos en Render, necesitas conectar **MongoDB Atlas**:
+
+1. Crea un clúster gratuito en [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
+2. Obtén tu **Connection String** (ejemplo: `mongodb+srv://usuario:password@cluster.mongodb.net/...`).
+3. Crea un archivo `.env` en la raíz del proyecto (basado en `.env.example`) y pega tu link en `MONGODB_URI`.
+4. **Migración**: Si tienes datos locales, ejecuta `node migrate.js` para subirlos a la nube.
+
+### Variables de Entorno en Render:
+Al configurar tu servicio en Render, ve a la pestaña **Environment** y añade:
+- `MONGODB_URI`: Tu link de conexión de MongoDB.
+- `ADMIN_TOKEN`: `prana2026` (o la contraseña que prefieras para el panel admin).
 - **Iconografía**: FontAwesome.
 - **Fuentes**: Google Fonts.
 
