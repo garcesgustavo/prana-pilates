@@ -14,9 +14,21 @@ const DB_PATH = path.join(__dirname, 'data', 'db.json');
 const ADMIN_TOKEN = 'prana2026';
 
 // Middleware
-app.use(helmet()); // Sets secure HTTP headers
+app.use(helmet({
+    contentSecurityPolicy: {
+        directives: {
+            ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+            "img-src": ["'self'", "data:", "https://images.unsplash.com"],
+            "script-src": ["'self'", "'unsafe-inline'"], // Allow inline scripts for animations if any
+            "style-src": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://cdnjs.cloudflare.com"],
+            "font-src": ["'self'", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com"],
+            "frame-src": ["'self'", "https://www.google.com"],
+        },
+    },
+})); // Configured security headers for external assets
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname))); // Serve static files from root folder
 
 // Rate Limiting: 100 requests per 15 minutes
 const limiter = rateLimit({
