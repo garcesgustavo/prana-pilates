@@ -522,22 +522,46 @@ img {
 
 .security-info {
     margin: 1.5rem 0;
-    padding: 1rem;
+    padding: 1.2rem;
     background: #f0f7f4;
-    border-radius: 8px;
-    font-size: 0.9rem;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    color: #2e7d32;
+    border: 1px solid #c8e6c9;
+}
+
+.trust-icons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.trust-pill {
+    background: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #555;
+    border: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.trust-pill i {
     color: #2e7d32;
 }
 
-.security-badges {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 0.8rem;
+.trust-pill i.fa-cc-visa {
+    color: #1a1f71;
 }
 
-.security-badges img {
-    height: 25px;
+.trust-pill i.fa-cc-mastercard {
+    color: #eb001b;
 }
 
 .payment-methods {
