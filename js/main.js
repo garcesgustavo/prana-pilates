@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 splash.style.display = 'none';
             }, 1000);
-        }, 3000);
+        }, 2000);
     }
 
     // Contact Form Handler
