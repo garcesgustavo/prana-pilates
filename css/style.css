@@ -236,11 +236,12 @@ img {
     height: 100vh;
     min-height: 500px;
     background: linear-gradient(rgba(250, 249, 246, 0.4), rgba(250, 249, 246, 0.4)), url('../assets/images/logo.jpeg');
-    background-size: 45%;
-    /* Reduced size to ensure logo text fits on screen */
+    background-size: contain;
+    /* Better for hero logo */
     background-repeat: no-repeat;
     background-position: center;
-    background-attachment: fixed;
+    background-attachment: scroll;
+    /* Attachment fixed is expensive on mobile/PC rendering */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -279,6 +280,9 @@ img {
 /* Sections */
 .section {
     padding: var(--spacing-lg) 0;
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 500px;
+    /* Guess for initial height */
 }
 
 .section-title {

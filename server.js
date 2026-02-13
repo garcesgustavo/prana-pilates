@@ -78,7 +78,14 @@ app.use(helmet({
 }));
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname), {
+    maxAge: '1d', // Cache static assets for 1 day
+    setHeaders: (res, path) => {
+        if (path.endsWith('.html')) {
+            res.setHeader('Cache-Control', 'public, max-age=0'); // Don't cache HTML files
+        }
+    }
+}));
 
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000,

@@ -2,10 +2,7 @@
  * Main Client Logic
  */
 
-document.addEventListener('DOMContentLoaded', async () => {
-    // Log visit
-    await Api.logVisit();
-
+document.addEventListener('DOMContentLoaded', () => {
     // Contact Form Handler
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
@@ -16,21 +13,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
 
-            // Treat contact as a potential client/lead (optional)
-            // await Api.addUser({ name, email }); 
-
             alert('¡Gracias por tu mensaje! Nos pondremos en contacto pronto.');
             contactForm.reset();
         });
     }
-
-    // Booking Logic
-    const bookingApp = document.getElementById('booking-app');
-    if (bookingApp) {
-        await renderBookingUI(bookingApp);
-    }
-
-    // ... rest of DOMContentLoaded logic (Scroll Animations, Mobile Menu) keep unchanged ...
 
     // Scroll Animations
     const observerOptions = {
@@ -72,6 +58,20 @@ document.addEventListener('DOMContentLoaded', async () => {
                 menuToggle.querySelector('i').classList.replace('fa-times', 'fa-bars');
             });
         });
+    }
+});
+
+// Defer non-critical tasks until after the page has loaded and is interactive
+window.addEventListener('load', () => {
+    // Log visit without blocking the initial render
+    setTimeout(() => {
+        Api.logVisit();
+    }, 1500);
+
+    // Initialise booking logic later
+    const bookingApp = document.getElementById('booking-app');
+    if (bookingApp) {
+        renderBookingUI(bookingApp);
     }
 });
 
