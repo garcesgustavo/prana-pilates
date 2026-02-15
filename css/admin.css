@@ -183,3 +183,18 @@
 .data-table tr:hover {
     background-color: rgba(125, 143, 133, 0.05);
 }
+
+/* Utilities */
+.hidden {
+    display: none !important;
+}
+
+.btn-full-width {
+    width: 100%;
+}
+
+.login-logo-img {
+    height: 60px;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}

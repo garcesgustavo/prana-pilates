@@ -14,6 +14,14 @@ if (!ADMIN_TOKEN) {
  */
 const requireAdmin = (req, res, next) => {
     const token = req.headers['authorization'];
+
+    // Debug logs - remove in production
+    if (token !== ADMIN_TOKEN) {
+        console.log(`[Auth Debug] Login attempt failed.`);
+        console.log(`[Auth Debug] Received token: '${token}'`);
+        console.log(`[Auth Debug] Expected (loaded): '${ADMIN_TOKEN}'`);
+    }
+
     if (token === ADMIN_TOKEN) {
         next();
     } else {

@@ -119,13 +119,15 @@
             border: 12px solid #222;
             box-shadow: 0 30px 60px rgba(0,0,0,0.5);
         }
+        .brand i { color: var(--accent); }
+        .toolbar-footer { font-size: 0.7rem; opacity: 0.5; }
     </style>
 </head>
 <body>
 
     <div class="toolbar">
         <div class="brand">
-            <i class="fas fa-leaf" style="color: var(--accent)"></i>
+            <i class="fas fa-leaf"></i>
             Dev Dashboard
         </div>
         <div class="controls">
@@ -139,20 +141,20 @@
                 <i class="fas fa-sync"></i> Refresh
             </button>
         </div>
-        <div style="font-size: 0.7rem; opacity: 0.5">Prana Pilates v1.2</div>
+        <div class="toolbar-footer">Prana Pilates v1.2</div>
     </div>
 
     <div class="preview-container" id="container">
         <!-- Site -->
         <div class="viewport">
             <div class="viewport-header"><i class="fas fa-globe mr-2"></i> &nbsp; Public Site</div>
-            <iframe id="iframeSite" src="/"></iframe>
+            <iframe id="iframeSite" src="/" title="Public Site Preview"></iframe>
         </div>
 
         <!-- Admin -->
         <div class="viewport">
             <div class="viewport-header"><i class="fas fa-lock mr-2"></i> &nbsp; Admin Panel</div>
-            <iframe id="iframeAdmin" src="/admin.html"></iframe>
+            <iframe id="iframeAdmin" src="/admin.html" title="Admin Panel Preview"></iframe>
         </div>
     </div>
 
