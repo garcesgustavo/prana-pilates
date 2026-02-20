@@ -1,27 +1,75 @@
-import { HealthCheck } from '@/components/health-check'
+'use client';
+
+import { useState, useEffect } from 'react';
+import { MessageCircle } from 'lucide-react';
+import Header from '../components/layout/Header';
+import Hero from '../components/sections/Hero';
+import Classes from '../components/sections/Classes';
+import Gallery from '../components/sections/Gallery';
+import Pricing from '../components/sections/Pricing';
+import Contact from '../components/sections/Contact';
+import Footer from '../components/layout/Footer';
+import PaymentModal from '../components/ui/PaymentModal';
 
 export default function Home() {
+    const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
+    const [selectedPlan, setSelectedPlan] = useState('');
+
+    const handlePricingClick = (plan: string) => {
+        setSelectedPlan(plan);
+        setIsPaymentModalOpen(true);
+    };
+
+    useEffect(() => {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        const animatedElements = document.querySelectorAll('.fade-in-up');
+        animatedElements.forEach(el => observer.observe(el));
+
+        return () => {
+            if (observer) observer.disconnect();
+        };
+    }, []);
+
     return (
-        <main className="flex min-h-screen flex-col items-center justify-between p-24">
-            <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-                <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-                    Zero-G Interface&nbsp;
-                    <code className="font-mono font-bold">Initiated</code>
-                </p>
-                <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-                    <HealthCheck />
-                </div>
-            </div>
+        <>
+            <Header />
 
-            <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-                <h1 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600">
-                    Antigravity
-                </h1>
-            </div>
+            <main>
+                <Hero />
+                <Classes />
+                <Gallery />
+                <Pricing onPlanSelect={handlePricingClick} />
+                <Contact />
+            </main>
 
-            <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-                {/* Links or Dashboard tiles can go here */}
-            </div>
-        </main>
-    )
+            <Footer />
+
+            <a href="https://wa.me/5491135638928?text=Hola,%20quisiera%20solicitar%20información%20sobre%20las%20clases%20de%20Prana%20Pilates."
+                className="fixed bottom-20 right-6 px-6 py-3 bg-[#25D366] text-white rounded-full shadow-2xl z-50 flex items-center gap-3 hover:bg-[#20bd5a] transition-all hover:scale-105"
+                target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                <MessageCircle size={20} className="fill-current" />
+                <span className="font-bold text-sm">WhatsApp</span>
+            </a>
+
+            <PaymentModal
+                isOpen={isPaymentModalOpen}
+                onClose={() => setIsPaymentModalOpen(false)}
+                selectedPlan={selectedPlan}
+            />
+        </>
+    );
 }

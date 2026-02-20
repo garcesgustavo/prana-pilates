@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { Providers } from './providers'
-import ChatWidget from '../components/ChatWidget'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,10 +17,12 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
+            <head>
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+            </head>
             <body className={inter.className}>
                 <Providers>
                     {children}
-                    <ChatWidget />
                 </Providers>
             </body>
         </html>
